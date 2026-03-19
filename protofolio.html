@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SAYAN | COBALT ARCHITECT 2500</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #5c7cff;
+            --accent: #00d1ff;
+            --bg: #03040b;
+            --surface: rgba(13, 15, 26, 0.7);
+            --border: rgba(92, 124, 255, 0.15);
+            --font-display: 'Syne', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --glitch-speed: 0.2s;
+        }
+
+        /* --- GOD TIER RESET --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: crosshair; }
+        html { scroll-behavior: smooth; overflow-x: hidden; }
+        body { 
+            background: var(--bg); 
+            color: #fff; 
+            font-family: 'Inter', sans-serif; 
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- AMBIENT ARCHITECTURE --- */
+        .grid-bg {
+            position: fixed; inset: 0;
+            background-image: 
+                linear-gradient(var(--border) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border) 1px, transparent 1px);
+            background-size: 40px 40px;
+            mask-image: radial-gradient(circle at center, black, transparent 90%);
+            z-index: -1;
+            opacity: 0.4;
+        }
+
+        .ambient-glow {
+            position: fixed; width: 100vw; height: 100vh;
+            background: radial-gradient(circle at 50% -10%, var(--primary), transparent 40%);
+            top: 0; z-index: -1; opacity: 0.15;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed; top: 0; width: 100%; padding: 20px;
+            display: flex; justify-content: space-between; align-items: center;
+            backdrop-filter: blur(25px); border-bottom: 1px solid var(--border);
+            z-index: 1000;
+        }
+        .logo { font-family: var(--font-display); font-size: 1rem; color: var(--primary); letter-spacing: -1px; }
+
+        /* --- HERO: MOBILE-FIRST RE-ENGINEERING --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 100px 20px 60px;
+            text-align: center;
+            gap: 30px;
+        }
+
+        .photo-vault {
+            position: relative;
+            width: 260px; height: 260px;
+            border-radius: 50% 5% 50% 5%;
+            overflow: hidden;
+            border: 2px solid var(--primary);
+            box-shadow: 0 0 30px var(--primary);
+            transition: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .photo-vault:hover { border-radius: 5%; transform: rotate(2deg); }
+        .photo-vault img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.8) contrast(1.2); }
+
+        .hero-text h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 12vw, 7rem);
+            line-height: 0.85;
+            text-transform: uppercase;
+            margin: 15px 0;
+        }
+        .hero-text h1 span {
+            color: transparent;
+            -webkit-text-stroke: 1px var(--primary);
+            display: block;
+        }
+
+        /* --- THE FIXED "INITIALIZE" BUTTON --- */
+        /* Using a hidden checkbox + label to create a "working" toggle without JS */
+        #term-toggle { display: none; }
+        
+        .initialize-trigger {
+            display: inline-block;
+            padding: 18px 35px;
+            background: var(--primary);
+            color: #fff;
+            font-family: var(--font-mono);
+            font-weight: 800;
+            text-decoration: none;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(92, 124, 255, 0.3);
+            transition: 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        .initialize-trigger:hover { transform: scale(1.05); background: var(--accent); color: #000; }
+
+        /* --- GOD-TIER CSS TERMINAL MODAL (FIX) --- */
+        .terminal-overlay {
+            position: fixed; inset: 0;
+            background: rgba(3, 4, 11, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 2000;
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0; pointer-events: none; transition: 0.4s;
+        }
+        /* The logic: When checkbox is checked, show terminal */
+        #term-toggle:checked ~ .terminal-overlay { opacity: 1; pointer-events: all; }
+
+        .terminal-box {
+            width: 90%; max-width: 500px;
+            background: #000; border: 1px solid var(--primary);
+            padding: 25px; font-family: var(--font-mono);
+            box-shadow: 0 0 50px rgba(92, 124, 255, 0.2);
+        }
+        .term-header { color: var(--primary); margin-bottom: 20px; font-size: 0.7rem; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+        .term-body p { margin-bottom: 10px; font-size: 0.8rem; }
+        .term-body span { color: var(--accent); }
+        
+        .close-btn { color: #ff5c5c; text-decoration: none; font-weight: bold; float: right; cursor: pointer; }
+
+        .mail-link {
+            display: block; margin-top: 20px;
+            color: #000; background: var(--accent);
+            text-align: center; padding: 10px; text-decoration: none; font-weight: bold;
+        }
+
+        /* --- THE BENTO GRID (10 PROJECTS) --- */
+        .work { padding: 80px 5%; }
+        .grid-header { font-family: var(--font-mono); font-size: 0.6rem; color: var(--primary); letter-spacing: 5px; text-align: center; margin-bottom: 40px; }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr); /* Mobile: 1 Column */
+            gap: 15px;
+            max-width: 1400px; margin: 0 auto;
+        }
+
+        .card {
+            position: relative; height: 300px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            overflow: hidden;
+            text-decoration: none;
+            transition: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Modern :has() selector - if any card is hovered, dim others */
+        .bento-grid:has(.card:hover) .card:not(:hover) {
+            opacity: 0.4;
+            filter: grayscale(1) blur(2px);
+        }
+
+        .card img {
+            width: 100%; height: 100%; object-fit: cover;
+            opacity: 0.5; transition: 0.6s;
+        }
+        .card:hover img { opacity: 0.2; transform: scale(1.1); }
+
+        .card-meta {
+            position: absolute; bottom: 0; left: 0; width: 100%;
+            padding: 30px; z-index: 2;
+        }
+        .card-meta h3 { font-family: var(--font-display); font-size: 1.4rem; color: #fff; margin-top: 5px; transform: translateY(10px); transition: 0.4s; }
+        .card-meta span { font-family: var(--font-mono); font-size: 0.6rem; color: var(--accent); }
+        .card:hover .card-meta h3 { transform: translateY(0); }
+
+        /* --- RESPONSIVE ARCHITECTURE --- */
+        @media (min-width: 768px) {
+            .bento-grid { grid-template-columns: repeat(12, 1fr); grid-auto-rows: 240px; }
+            .p1 { grid-column: span 8; grid-row: span 2; }
+            .p2 { grid-column: span 4; grid-row: span 3; }
+            .p3 { grid-column: span 4; grid-row: span 2; }
+            .p4 { grid-column: span 4; grid-row: span 2; }
+            .p5 { grid-column: span 4; grid-row: span 2; }
+            .p6 { grid-column: span 6; grid-row: span 2; }
+            .p7 { grid-column: span 6; grid-row: span 2; }
+            .p8 { grid-column: span 4; grid-row: span 2; }
+            .p9 { grid-column: span 4; grid-row: span 2; }
+            .p10 { grid-column: span 4; grid-row: span 2; }
+        }
+
+        @media (min-width: 1024px) {
+            .hero { flex-direction: row; padding: 0 10%; text-align: left; }
+            .hero-text { flex: 1; }
+            .photo-vault { width: 450px; height: 550px; border-radius: 40px; }
+        }
+
+        footer { padding: 60px 20px; text-align: center; font-family: var(--font-mono); font-size: 0.6rem; color: var(--primary); border-top: 1px solid var(--border); margin-top: 50px; }
+
+    </style>
+</head>
+<body>
+
+    <div class="grid-bg"></div>
+    <div class="ambient-glow"></div>
+
+    <!-- Checkbox for No-JS Logic -->
+    <input type="checkbox" id="term-toggle">
+
+    <nav>
+        <div class="logo">SAYAN_ARCHITECT</div>
+        <div style="font-family: var(--font-mono); font-size: 0.6rem; opacity: 0.5;">[ VERSION 2.5.0 ]</div>
+    </nav>
+
+    <!-- CONTACT MODAL (Terminal Style) -->
+    <div class="terminal-overlay">
+        <div class="terminal-box">
+            <label for="term-toggle" class="close-btn">[ X ]</label>
+            <div class="term-header">SYSTEM_CONTACT_v2500</div>
+            <div class="term-body">
+                <p><span>></span> INITIALIZING_HANDSHAKE...</p>
+                <p><span>></span> STATUS: <font color="#00ff00">ONLINE</font></p>
+                <p><span>></span> PROTOCOL: SECURE_MAIL_TRANSCEIVER</p>
+                <a href="mailto:sayan.dev@work.com" class="mail-link">ESTABLISH CONNECTION</a>
+            </div>
+        </div>
+    </div>
+
+    <section class="hero">
+        <div class="photo-vault">
+            <img src="Sayan.png" alt="Sayan Ahsan">
+        </div>
+        <div class="hero-text">
+            <span style="font-family: var(--font-mono); color: var(--primary); font-size: 0.7rem; letter-spacing: 5px;">// COBALT_ENGINEER</span>
+            <h1>DIGITAL<br><span>ARCHITECT</span><br>SYSTEM</h1>
+            <p style="font-family: var(--font-mono); font-size: 0.8rem; opacity: 0.6; max-width: 500px; margin-bottom: 30px;">
+                Specializing in zero-gravity CSS architecture and industrial-grade web deployments.
+            </p>
+            <label for="term-toggle" class="initialize-trigger">INITIALIZE PROJECT</label>
+        </div>
+    </section>
+
+    <section class="work">
+        <div class="grid-header">// REPOSITORY_DEPLOYMENTS [10/10]</div>
+        <div class="bento-grid">
+            
+            <!-- 01 -->
+            <a href="https://ahsanursayan942-lab.github.io/Sparkle-omin/Sparkle.html" class="card p1">
+                <img src="Sparkle.jpeg" alt="">
+                <div class="card-meta"><span>01 / COMMERCE</span><h3>SPARKLE OMNI</h3></div>
+            </a>
+
+            <!-- 02 -->
+            <a href="https://ahsanursayan942-lab.github.io/Youtube-clone/Index.html" class="card p2">
+                <img src="Youtube.jpeg" alt="">
+                <div class="card-meta"><span>02 / STREAMING</span><h3>YOUTUBE 2.0</h3></div>
+            </a>
+
+            <!-- 03 -->
+            <a href="https://ahsanursayan942-lab.github.io/Resturent-page/Resturent.html" class="card p3">
+                <img src="Culinary.jpeg" alt="">
+                <div class="card-meta"><span>03 / HOSPITALITY</span><h3>CULINARY ELITE</h3></div>
+            </a>
+
+            <!-- 04 -->
+            <a href="https://ahsanursayan942-lab.github.io/Product-page/product.html" class="card p4">
+                <img src="red-gold-headphones-digital-device_53876-97303.jpg" alt="">
+                <div class="card-meta"><span>04 / HARDWARE</span><h3>SONIC PRO</h3></div>
+            </a>
+
+            <!-- 05 -->
+            <a href="https://ahsanursayan942-lab.github.io/Vortex-chain/Vortex.html" class="card p5">
+                <img src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=800" alt="">
+                <div class="card-meta"><span>05 / FINTECH</span><h3>VORTEX CHAIN</h3></div>
+            </a>
+
+            <!-- 06 -->
+            <a href="https://ahsanursayan942-lab.github.io/Real-State/Architecture.html" class="card p6">
+                <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800" alt="">
+                <div class="card-meta"><span>06 / REAL ESTATE</span><h3>SKYLINE RE</h3></div>
+            </a>
+
+            <!-- 07 -->
+            <a href="#" class="card p7">
+                <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=800" alt="">
+                <div class="card-meta"><span>07 / CORPORATE</span><h3>LAWSHIELD</h3></div>
+            </a>
+
+            <!-- 08 -->
+            <a href="#" class="card p8">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800" alt="">
+                <div class="card-meta"><span>08 / ANALYTICS</span><h3>ZENITH DASH</h3></div>
+            </a>
+
+            <!-- 09 -->
+            <a href="#" class="card p9">
+                <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=800" alt="">
+                <div class="card-meta"><span>09 / HEALTH</span><h3>IRON PULSE</h3></div>
+            </a>
+
+            <!-- 10 -->
+            <a href="#" class="card p10">
+                <img src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&w=1200" alt="">
+                <div class="card-meta"><span>10 / RETAIL</span><h3>NOVA STUDIO</h3></div>
+            </a>
+
+        </div>
+    </section>
+
+    <footer>
+        [ ALL SYSTEMS OPERATIONAL ] <br>
+        DESIGNED FOR INTERNET-3 // 2026 COBALT SYSTEMS
+    </footer>
+
+</body>
+</html>
