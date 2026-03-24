@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>SAYAN | SOVEREIGN ARCHITECT 2500</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=Cormorant+Garamond:ital,wght@0,600;1,500&family=JetBrains+Mono:wght@400;700&family=Inter:wght@200;400;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #c5a059; /* Sovereign Gold */
+            --cobalt: #5c7cff;  /* Cobalt Blue */
+            --bg: #03040b;
+            --surface: rgba(13, 15, 26, 0.8);
+            --gold-alpha: rgba(197, 160, 89, 0.96);
+            --border: rgba(197, 160, 89, 0.15);
+            --font-display: 'Syne', sans-serif;
+            --font-serif: 'Cormorant Garamond', serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --transition: all 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        /* --- GOD-TIER RESET --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: crosshair; }
+        html { scroll-behavior: smooth; overflow-x: hidden; }
+        body { background: var(--bg); color: #fff; font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
+
+        /* --- AMBIENT GRID ENGINE --- */
+        .grid-bg {
+            position: fixed; inset: 0;
+            background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+            background-size: 50px 50px;
+            mask-image: radial-gradient(circle at center, black, transparent 90%);
+            z-index: -1; opacity: 0.4;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed; top: 0; width: 100%; padding: 20px;
+            display: flex; justify-content: space-between; align-items: center;
+            backdrop-filter: blur(25px); border-bottom: 1px solid var(--border);
+            z-index: 1000; background: rgba(3, 4, 11, 0.8);
+        }
+        .logo { font-family: var(--font-serif); font-size: 1.4rem; color: var(--primary); font-weight: 700; text-decoration: none; letter-spacing: -1px; }
+        .logo span { font-family: var(--font-mono); font-size: 0.6rem; color: #fff; margin-left: 10px; opacity: 0.5; }
+
+        /* --- HERO: THE ARCHITECT (PHOTO 1) --- */
+        .hero {
+            height: 100dvh; display: grid; grid-template-columns: 1.2fr 0.8fr;
+            align-items: center; padding: 0 5%; overflow: hidden; position: relative;
+        }
+        .hero-text { z-index: 10; }
+        .hero-text h1 {
+            font-family: var(--font-display); font-size: clamp(2.5rem, 10vw, 7.5rem);
+            line-height: 0.85; text-transform: uppercase; margin-bottom: 20px;
+        }
+        .hero-text h1 span { color: transparent; -webkit-text-stroke: 1px var(--primary); font-family: var(--font-serif); font-style: italic; text-transform: none; }
+        
+        .hero-image-vault {
+            position: absolute; right: 0; top: 0; width: 50%; height: 100%;
+            z-index: 1;
+        }
+        .hero-image-vault img {
+            width: 100%; height: 100%; object-fit: cover; object-position: center top;
+            mask-image: linear-gradient(to left, black 70%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to left, black 70%, transparent 100%);
+            filter: grayscale(0.4) contrast(1.1);
+        }
+
+        /* --- 12 TECHNICAL PILLARS GRID --- */
+        .section { padding: 120px 5%; max-width: 1600px; margin: 0 auto; }
+        .tag { font-family: var(--font-mono); color: var(--primary); font-size: 0.7rem; letter-spacing: 5px; text-transform: uppercase; display: block; margin-bottom: 20px; }
+        
+        .expertise-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem; margin-top: 40px;
+        }
+        .skill-card {
+            background: var(--surface); padding: 50px 35px; border: 1px solid var(--border);
+            transition: var(--transition);
+        }
+        .skill-card:hover { border-color: var(--primary); background: var(--primary); color: var(--bg); transform: translateY(-10px); }
+        .skill-card h3 { font-family: var(--font-serif); font-size: 2rem; margin-bottom: 15px; }
+        .skill-card p { font-size: 0.9rem; opacity: 0.8; font-weight: 300; }
+
+        /* --- CORE DEPARTMENTS (PHOTOS 2-5) --- */
+        .hierarchy { background: #080a10; padding: 100px 5%; }
+        .leader-grid { 
+            display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 20px; 
+            max-width: 1600px; margin: 0 auto; 
+        }
+        .profile { position: relative; background: var(--bg); border-bottom: 4px solid var(--primary); overflow: hidden; }
+        .profile img { width: 100%; height: 500px; object-fit: cover; filter: grayscale(1); transition: 0.6s; }
+        .profile:hover img { filter: grayscale(0); transform: scale(1.05); }
+        .profile-info { padding: 25px; }
+        .profile-info span { font-family: var(--font-mono); color: var(--primary); font-size: 0.6rem; text-transform: uppercase; letter-spacing: 2px; }
+        .profile-info h4 { font-family: var(--font-serif); font-size: 1.6rem; margin-top: 5px; }
+
+        /* --- THE PROJECT REPOSITORY: LINKED & HOVER (PHOTOS 6-15) --- */
+        .bench-grid {
+            display: grid; 
+            grid-template-columns: repeat(5, 1fr); /* Desktop: 5 Cols */
+            gap: 15px; margin-top: 50px;
+        }
+        .project-anchor {
+            display: block; text-decoration: none; position: relative; overflow: hidden; aspect-ratio: 4/5; background: #000;
+        }
+        .project-anchor img {
+            width: 100%; height: 100%; object-fit: cover; filter: grayscale(1); transition: var(--transition);
+        }
+        .project-overlay {
+            position: absolute; inset: 0; background: var(--gold-alpha);
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            padding: 25px; text-align: center; opacity: 0; transition: var(--transition); z-index: 5;
+        }
+        /* Text Pop-Out Animation */
+        .project-overlay h5, .project-overlay span, .project-overlay p {
+            color: var(--bg); transform: translateY(40px); opacity: 0; transition: var(--transition);
+        }
+        .project-overlay h5 { font-family: var(--font-serif); font-size: 1.6rem; font-weight: 700; margin: 10px 0; }
+        .project-overlay span { font-family: var(--font-mono); font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; }
+        .project-overlay p { font-size: 0.8rem; font-weight: 500; line-height: 1.4; }
+
+        .project-anchor:hover img { filter: grayscale(0); transform: scale(1.1); }
+        .project-anchor:hover .project-overlay { opacity: 1; }
+        .project-anchor:hover h5, .project-anchor:hover span, .project-anchor:hover p { transform: translateY(0); opacity: 1; }
+
+        /* --- TERMINAL MODAL (NO JS) --- */
+        #term-check { display: none; }
+        .terminal-overlay {
+            position: fixed; inset: 0; background: rgba(3, 4, 11, 0.98); backdrop-filter: blur(20px);
+            z-index: 3000; display: flex; align-items: center; justify-content: center;
+            opacity: 0; pointer-events: none; transition: 0.4s;
+        }
+        #term-check:checked ~ .terminal-overlay { opacity: 1; pointer-events: all; }
+        .terminal-box {
+            width: 90%; max-width: 600px; background: #000; border: 1px solid var(--primary);
+            padding: 40px; font-family: var(--font-mono); box-shadow: 0 0 80px rgba(197, 160, 89, 0.15);
+        }
+        .close-btn { color: var(--primary); float: right; cursor: pointer; font-weight: 800; font-size: 1.2rem; }
+        .init-btn { 
+            display: inline-block; padding: 20px 40px; background: var(--primary); 
+            color: var(--bg); font-family: var(--font-mono); font-weight: 800; 
+            text-decoration: none; border-radius: 2px; cursor: pointer;
+        }
+
+        /* --- MOBILE RE-ENGINEERING --- */
+        @media (max-width: 1024px) {
+            .hero { grid-template-columns: 1fr; height: auto; min-height: 100dvh; padding-top: 150px; text-align: center; }
+            .hero-image-vault { width: 100%; height: 50dvh; position: relative; mask-image: none; -webkit-mask-image: none; }
+            .hero-content { padding: 0 20px; }
+            .leader-grid { grid-template-columns: 1fr; }
+            .bench-grid { grid-template-columns: 1fr 1fr; } /* Strictly 2 columns on mobile */
+        }
+
+        /* --- FOOTER AREA --- */
+        .footer-area { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); background: #05060a; border-top: 1px solid var(--border); }
+        .map-wrapper { height: 450px; filter: grayscale(1) invert(0.9) contrast(1.2); opacity: 0.4; }
+        footer { padding: 80px 20px; text-align: center; font-family: var(--font-mono); font-size: 0.7rem; color: var(--primary); letter-spacing: 2px; }
+
+    </style>
+</head>
+<body>
+
+    <div class="grid-bg"></div>
+    <input type="checkbox" id="term-check">
+
+    <!-- NAVIGATION -->
+    <nav>
+        <a href="#" class="logo">SAYAN<span>// SYSTEM_ARCHITECT</span></a>
+        <div style="font-family: var(--font-mono); font-size: 0.6rem; color: var(--primary);">[ DEPLOYMENT_v2.6.0 ]</div>
+    </nav>
+
+    <!-- CONTACT TERMINAL -->
+    <div class="terminal-overlay">
+        <div class="terminal-box">
+            <label for="term-check" class="close-btn">[ X ]</label>
+            <div style="color: var(--primary); border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-bottom: 25px;">SECURE_HANDSHAKE_INIT</div>
+            <p style="color: var(--cobalt); margin-bottom: 15px;">> Connection established...</p>
+            <p style="margin-bottom: 25px; font-size: 0.85rem; line-height: 1.6;">Protocols ready for high-stakes digital deployments. Initializing communication link.</p>
+            <a href="mailto:architect@sayan.systems" style="display: block; background: var(--primary); color: #000; text-align: center; padding: 20px; text-decoration: none; font-weight: 800;">ESTABLISH ENCRYPTED LINK</a>
+        </div>
+    </div>
+
+    <!-- HERO SECTION (PHOTO 1) -->
+    <section class="hero">
+        <div class="hero-content">
+            <span class="tag">// LEAD_SYSTEMS_ARCHITECT</span>
+            <h1>Digital<br><span>STRUCTURE</span><br>Systems</h1>
+            <p>Designing industrial-grade digital infrastructure and architectural-level web ecosystems for the global market.</p>
+            <label for="term-check" class="init-btn">INITIALIZE PROJECT</label>
+        </div>
+        <div class="hero-image-vault">
+            <img src="Sayan.png" alt="Sayan Ahsan">
+        </div>
+    </section>
+
+    <!-- 12 TECHNICAL PILLARS -->
+    <section class="section" id="expertise">
+        <span class="tag">01_CORE_CAPABILITIES</span>
+        <h2>12 Pillars of Engineering</h2>
+        <div class="expertise-grid">
+            <div class="skill-card"><h3>UI/UX Matrix</h3><p>Mathematical precision in visual interface design.</p></div>
+            <div class="skill-card"><h3>Cyber Security</h3><p>Industrial-grade defense for sensitive digital assets.</p></div>
+            <div class="skill-card"><h3>System Arch</h3><p>Building high-performance, low-latency web backends.</p></div>
+            <div class="skill-card"><h3>AI Integration</h3><p>Strategic deployment of neural network ecosystems.</p></div>
+            <div class="skill-card"><h3>Cloud Dev</h3><p>Zero-failure global scaling via sovereign cloud logic.</p></div>
+            <div class="skill-card"><h3>Blockchain</h3><p>Secure ledger architecture and decentralized systems.</p></div>
+            <div class="skill-card"><h3>Data Science</h3><p>Visualizing complex metrics into actionable insights.</p></div>
+            <div class="skill-card"><h3>E-Commerce</h3><p>Luxury retail systems with high-speed transaction logic.</p></div>
+            <div class="skill-card"><h3>Mobile Fitting</h3><p>Dynamic viewport fitting for the iPhone 16 generation.</p></div>
+            <div class="skill-card"><h3>SEO Dominance</h3><p>Engineered for #1 rankings on global search engines.</p></div>
+            <div class="skill-card"><h3>Motion Design</h3><p>Zero-JS high-performance cinematic CSS animations.</p></div>
+            <div class="skill-card"><h3>Consultancy</h3><p>Bespoke technical advisory for high-billing ventures.</p></div>
+        </div>
+    </section>
+
+    <!-- MASTER DEPARTMENTS (PHOTOS 2-5) -->
+    <section class="hierarchy">
+        <div class="section" style="padding: 0;">
+            <span class="tag">02_CORE_DEPARTMENTS</span>
+            <div class="leader-grid">
+                <div class="profile">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800">
+                    <div class="profile-info"><span>Dept 01</span><h4>UI Engineering</h4></div>
+                </div>
+                <div class="profile">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600">
+                    <div class="profile-info"><span>Dept 02</span><h4>Infrastructure</h4></div>
+                </div>
+                <div class="profile">
+                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=600">
+                    <div class="profile-info"><span>Dept 03</span><h4>Neural Strategy</h4></div>
+                </div>
+                <div class="profile">
+                    <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=600">
+                    <div class="profile-info"><span>Dept 04</span><h4>Cyber Defense</h4></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- THE REPOSITORY: FULLY LINKED (PHOTOS 6-15) -->
+    <section class="section">
+        <span class="tag">03_SIGNATURE_DEPLOYMENTS</span>
+        <h2>Project Repository</h2>
+        <div class="bench-grid">
+            
+            <!-- 01 -->
+            <a href="https://ahsanursayan942-lab.github.io/Sparkle-omin/Sparkle.html" class="project-anchor">
+                <img src="Sparkle.jpg" alt="Project 1">
+                <div class="project-overlay"><span>Commerce</span><h5>Sparkle Omni</h5><p>Full-scale luxury retail ecosystem.</p></div>
+            </a>
+
+            <!-- 02 -->
+            <a href="https://ahsanursayan942-lab.github.io/Youtube-clone/Index.html" class="project-anchor">
+                <img src="Youtube.jpeg" alt="Project 2">
+                <div class="project-overlay"><span>Streaming</span><h5>Youtube 2.0</h5><p>Industrial video delivery engine.</p></div>
+            </a>
+
+            <!-- 03 -->
+            <a href="https://ahsanursayan942-lab.github.io/Resturent-page/Resturent.html" class="project-anchor">
+                <img src="L'ÉCLIPSE.jpg" alt="Project 3">
+                <div class="project-overlay"><span>Hospitality</span><h5>Soul of Paris</h5><p>Cinematic dining interface.</p></div>
+            </a>
+
+            <!-- 04 -->
+            <a href="https://ahsanursayan942-lab.github.io/Product-page/product.html" class="project-anchor">
+                <img src="red-gold-headphones-digital-device_53876-97303.jpg" alt="Project 4">
+                <div class="project-overlay"><span>Hardware</span><h5>Sonic Pro</h5><p>Integrated product UI design.</p></div>
+            </a>
+
+            <!-- 05 -->
+            <a href="https://ahsanursayan942-lab.github.io/Vortex-chain/Vortex.html" class="project-anchor">
+                <img src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=800" alt="Project 5">
+                <div class="project-overlay"><span>Fintech</span><h5>Vortex Chain</h5><p>Sovereign ledger architecture.</p></div>
+            </a>
+
+            <!-- 06 -->
+            <a href="https://ahsanursayan942-lab.github.io/Real-State/Architecture.html" class="project-anchor">
+                <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800" alt="Project 6">
+                <div class="project-overlay"><span>Real Estate</span><h5>Skyline RE</h5><p>Dynamic property management.</p></div>
+            </a>
+
+            <!-- 07 -->
+            <a href="https://ahsanursayan942-lab.github.io/Law-shield/Law.html" class="project-anchor">
+                <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=800" alt="Project 7">
+                <div class="project-overlay"><span>Corporate</span><h5>Lawshield</h5><p>Defense-grade legal portal.</p></div>
+            </a>
+
+            <!-- 08 -->
+            <a href="https://ahsanursayan942-lab.github.io/Zenith-Dash/Zenith.html" class="project-anchor">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800" alt="Project 8">
+                <div class="project-overlay"><span>Analytics</span><h5>Zenith Dash</h5><p>Mathematical visualization.</p></div>
+            </a>
+
+            <!-- 09 -->
+            <a href="https://ahsanursayan942-lab.github.io/Iron-plus/Iron.html" class="project-anchor">
+                <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=800" alt="Project 9">
+                <div class="project-overlay"><span>Health</span><h5>Iron Pulse</h5><p>Biometric monitoring UI.</p></div>
+            </a>
+
+            <!-- 10 -->
+            <a href="https://ahsanursayan942-lab.github.io/Nova-Studio-/Nova.html" class="project-anchor">
+                <img src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&w=1200" alt="Project 10">
+                <div class="project-overlay"><span>Retail</span><h5>Nova Studio</h5><p>Next-gen boutique ecosystem.</p></div>
+            </a>
+
+        </div>
+    </section>
+
+    <!-- CONTACT & MAP -->
+    <div class="footer-area">
+        <div style="padding: 10%; display: flex; flex-direction: column; justify-content: center;">
+            <span class="tag">04_LOCATION_INTEL</span>
+            <h2 style="font-family: var(--font-serif);">Global Systems HQ</h2>
+            <br>
+            <p style="opacity: 0.5;">Level 101, Cobalt Tower, Financial District, NY</p>
+            <br>
+            <p style="color: var(--primary); font-family: var(--font-mono);">architect@sayan.systems</p>
+            <p style="color: var(--primary); font-family: var(--font-mono);">+1 (212) 555-0900</p>
+        </div>
+        <div class="map-wrapper">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.617543867397!2d-73.985428!3d40.748441!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDDCsDQ0JzU0LjQiTiA3M8KwNTknMDcuNSJX!5e0!3m2!1sen!2sus!4v1630000000000" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+    </div>
+
+    <footer>
+        [ ALL SYSTEMS OPERATIONAL ] <br>
+        DESIGNED FOR INTERNET-3 // 2026 SOVEREIGN SYSTEMS
+    </footer>
+
+</body>
+</html>
